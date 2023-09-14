@@ -31,59 +31,54 @@ const Login = () => {
                 <h1 className="font-semibold text-xl">Ankasa</h1>
               </div>
               <div className="pt-16">
-                <div>
-                  <p className="text-2xl font-semibold py-6">Login</p>
-                </div>
+                <p className="text-2xl font-semibold py-6">Login</p>
 
                 <form action="">
-                  <div className="relative z-0 my-10">
-                    <input
-                      type="email"
-                      id="user-email"
-                      className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                      placeholder=" "
-                      required
-                    />
-                    <label
-                      htmlFor="user-email"
-                      className="absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >
-                      Email
-                    </label>
-                  </div>
-                  <div className="relative z-0 my-10">
-                    <input
-                      type="password"
-                      id="password"
-                      className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                      placeholder=" "
-                      required
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >
-                      Password
-                    </label>
+                  <div>
+                    <div className="relative z-0 my-10">
+                      <input
+                        type="email"
+                        id="user-email"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "
+                      />
+                      <label
+                        htmlFor="user-email"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Email
+                      </label>
+                    </div>
                   </div>
                   <div>
-                    <Button text="Sign In" />
+                    <div className="relative z-0 my-10">
+                      <input
+                        type="password"
+                        id="user-password"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "
+                      />
+                      <label
+                        htmlFor="user-password"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Password
+                      </label>
+                    </div>
                   </div>
+                  <Button text="Sign In" />
                 </form>
 
                 <div className="py-8">
                   <div className="text-center">
-                    <div>
-                      <p>Did you forgot your password ?</p>
-                    </div>
-                    <div>
-                      <Link
-                        href="#"
-                        className="text-blue-600 underline-offset-4"
-                      >
-                        Tap here for reset
-                      </Link>
-                    </div>
+                    <p>Did you forgot your password ?</p>
+
+                    <Link
+                      href="../forget-password"
+                      className="text-blue-600 underline-offset-4"
+                    >
+                      Tap here for reset
+                    </Link>
                   </div>
                 </div>
               </div>
