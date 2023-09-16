@@ -65,7 +65,7 @@ const NavbarAuth = () => {
             />
           </div> */}
           <div className="flex flex-row items-center gap-6">
-            <div>
+            <div className="">
               <FiMail size={20} color="gray" />
             </div>
             <div>

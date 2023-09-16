@@ -1,16 +1,38 @@
 "use client";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Button from "@/components/button/Button";
+import ButtonOutline from "@/components/button-outline/ButtonOutline";
 import Link from "next/link";
+// import { useRouter } from "next/router";
 
 const Register = () => {
+  // const router = useRouter();
+  // const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const result = axios.post(`${BASE_URL}/users/register`, form);
+  //   console.log(result);
+  //   router.push("/login", { scroll: false });
+  // };
+
+  // console.log(form);
+
   return (
     <div className="flex min-h-screen bg-white">
       <div className="w-screen mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 max-h-screen min-h-full">
-          <div className="lg:col-span-4 bg-blue-500">
+          <div className="lg:col-span-4 bg-blue-500 max-md:hidden">
             <div className="grid place-items-center h-screen">
               <Image
                 src="/image/logo-ankasa.png"
@@ -33,14 +55,17 @@ const Register = () => {
               </div>
               <div className="pt-16">
                 <div>
-                  <p className="text-2xl font-semibold py-6">Login</p>
+                  <p className="text-2xl font-semibold py-6">Register</p>
                 </div>
 
-                <form action="">
+                <form onSubmit={(e) => onSubmit(e)}>
                   <div className="relative z-0 my-10">
                     <input
                       type="text"
                       id="full-name"
+                      onChange={(e) =>
+                        setForm({ ...form, name: e.target.value })
+                      }
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
                       required
@@ -56,6 +81,9 @@ const Register = () => {
                     <input
                       type="email"
                       id="user-email"
+                      onChange={(e) =>
+                        setForm({ ...form, email: e.target.value })
+                      }
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
                       required
@@ -71,6 +99,9 @@ const Register = () => {
                     <input
                       type="password"
                       id="password"
+                      onChange={(e) =>
+                        setForm({ ...form, password: e.target.value })
+                      }
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
                       required
@@ -83,22 +114,37 @@ const Register = () => {
                     </label>
                   </div>
                   <div>
-                    <Button text="Sign In" />
+                    <Button type="submit" text="Sign Up" />
                   </div>
                 </form>
 
-                <div className="py-8">
+                <div class="flex items-center my-4">
+                  <input
+                    id="default-checkbox"
+                    type="checkbox"
+                    value=""
+                    class="w-4 h-4 text-blue-600 bg-white border-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label
+                    for="default-checkbox"
+                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Accept terms and condition
+                  </label>
+                </div>
+
+                <hr />
+                <div className="py-4">
                   <div className="text-center">
                     <div>
-                      <p>Did you forgot your password ?</p>
+                      <p>Already have an account ?</p>
                     </div>
-                    <div>
-                      <Link
-                        href="#"
-                        className="text-blue-600 underline-offset-4"
-                      >
-                        Tap here for reset
-                      </Link>
+                    <div className="mt-4">
+                      <ButtonOutline
+                        type="button"
+                        text="Sign In"
+                        navigate="/login"
+                      />
                     </div>
                   </div>
                 </div>

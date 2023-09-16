@@ -9,7 +9,7 @@ const Login = () => {
     <div className="flex min-h-screen bg-white">
       <div className="w-screen mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 max-h-screen min-h-full">
-          <div className="lg:col-span-4 bg-blue-500">
+          <div className="lg:col-span-4 bg-blue-500 max-md:hidden">
             <div className="grid place-items-center h-screen">
               <Image
                 src="/image/logo-ankasa.png"
@@ -70,12 +70,12 @@ const Login = () => {
                 </form>
 
                 <div className="py-8">
-                  <div className="text-center">
-                    <p>Did you forgot your password ?</p>
+                  <div className="text-center text-sm">
+                    <p className="mb-2">Did you forgot your password ?</p>
 
                     <Link
                       href="../forget-password"
-                      className="text-blue-600 underline-offset-4"
+                      className="text-blue-600 underline underline-offset-4"
                     >
                       Tap here for reset
                     </Link>

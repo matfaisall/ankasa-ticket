@@ -1,7 +1,7 @@
 import React from "react";
 
-const ForgetPassword = () => {
-  return <div>ForgetPassword</div>;
+const OTPVerification = () => {
+  return <div>OTPVerification</div>;
 };
 
-export default ForgetPassword;
+export default OTPVerification;
