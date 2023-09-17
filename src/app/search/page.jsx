@@ -396,7 +396,7 @@ const Ticket = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-center w-fit text-gray-600 text-sm">
+                <p className="text-center w-fit text-gray-600 text-">
                   3 hours 11 minutes
                   <br />
                   <span className="text-xs text-center">(1 transit)</span>

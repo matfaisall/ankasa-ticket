@@ -5,7 +5,7 @@ import { FiBell, FiMail } from "react-icons/fi";
 
 const NavbarAuth = () => {
   return (
-    <nav className="bg-white border-gray-200 px-4 lg:px-16">
+    <nav className="bg-white border-gray-200 px-4 lg:px-16 shadow-md">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
         <Link href="#" className="flex items-center">
           <img src="/image/plane.png" alt="" className="h-8 mr-3" />
