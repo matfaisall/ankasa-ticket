@@ -15,17 +15,19 @@ const MyBooking = () => {
   return (
     <>
       <NavbarAuth />
+      {/* blue background */}
       <div className="bg-gray-100">
         <div className="bg-blue-600 w-full h-28 rounded-b-2xl right-0 left-0 top-18 -z-50">
           <div className="p-2">
             <Image
               src="/image/shadow-plane.png"
-              alt=""
+              alt="shadow plane"
               width={100}
               height={100}
             />
           </div>
         </div>
+
         <div className="px-4 lg:px-16 relative -top-24">
           <div className="gap-6 max-w-screen-xl flex flex-wrap items-center mx-auto">
             <div className="flex flex-row w-full gap-6">
@@ -120,16 +122,16 @@ const MyBooking = () => {
                   </div>
                   <form action="">
                     <div className="relative z-0 mb-8">
-                      <label for="underline_select" class="sr-only">
+                      <label htmlFor="underline_select" className="sr-only">
                         Underline select
                       </label>
                       <select
                         id="underline_select"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option selected>Choose Call Name</option>
-                        <option value="mr">Mr.</option>
-                        <option value="mis">Mis.</option>
+                        <option>Choose Call Name</option>
+                        <option defaultValue="mr">Mr.</option>
+                        <option defaultValue="mis">Mis.</option>
                       </select>
                     </div>
 
@@ -148,16 +150,16 @@ const MyBooking = () => {
                       </label>
                     </div>
                     <div className="relative z-0">
-                      <label for="underline_select" class="sr-only">
+                      <label htmlFor="underline_select" className="sr-only">
                         Underline select
                       </label>
                       <select
                         id="underline_select"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option selected>Nationality</option>
-                        <option value="indo">Indonesia</option>
-                        <option value="others">others</option>
+                        <option>Nationality</option>
+                        <option defaultValue="indo">Indonesia</option>
+                        <option defaultValue="others">others</option>
                       </select>
                     </div>
                   </form>
@@ -177,11 +179,11 @@ const MyBooking = () => {
                         <input
                           id="default-checkbox"
                           type="checkbox"
-                          value=""
+                          defaultValue=""
                           className="w-4 h-4 text-blue-600 bg-white border-blue-600 rounded focus:ring-blue-500 focus:ring-2"
                         />
                         <label
-                          for="default-checkbox"
+                          htmlFor="default-checkbox"
                           className="ml-2 text-sm font-semibold text-gray-900 dark:text-gray-300"
                         >
                           Trevel Insurance
@@ -229,6 +231,7 @@ const MyBooking = () => {
                       src="/image/garuda-indo.png"
                       width={90}
                       height={60}
+                      alt="garuda indonesia"
                     />
                     <p className="font-semibold text-sm text-gray-600">
                       Garuda Indonesia
@@ -265,7 +268,7 @@ const MyBooking = () => {
                       <input
                         id="default-checkbox"
                         type="checkbox"
-                        value=""
+                        defaultValue=""
                         className="w-4 h-4 text-blue-600 bg-white border-blue-600 rounded-full focus:ring-blue-500 focus:ring-2"
                       />
                       <p className="text-blue-600 text-sm">Refundable</p>
@@ -274,7 +277,7 @@ const MyBooking = () => {
                       <input
                         id="default-checkbox"
                         type="checkbox"
-                        value=""
+                        defaultValue=""
                         className="w-4 h-4 text-blue-600 bg-white border-blue-600 rounded-full focus:ring-blue-500 focus:ring-2"
                       />
                       <p className="text-blue-600 text-sm">Can resechedule</p>
