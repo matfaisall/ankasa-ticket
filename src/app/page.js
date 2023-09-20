@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavigationBar from "@/components/navbar/Navbar";
+import { NavigationBar } from "@/components/navbar/Navbar";
 import Homepage from "./homepage/page";
 import Footer from "@/components/footer/Footer";
 
