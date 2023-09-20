@@ -13,7 +13,7 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-white">
-      <div className="w-full mx-auto max-w-screen-xl p-4 py-6 lg:py-8 lg:px-16">
+      <div className="w-full mx-auto max-w-screen-2xl p-4 py-6 lg:py-8 lg:px-16">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href="#" className="flex item-center">

@@ -108,7 +108,10 @@ export function NavigationBar() {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            Material Tailwind
+            <div className="flex flex-row items-center gap-3">
+              <img src="/image/plane.png" alt="" width={45} />
+              <h4 className="font-semibold text-lg">Ankasa</h4>
+            </div>
           </Typography>
           <div className="mr-4 hidden lg:block">{navList}</div>
           <div className="flex items-center gap-4">

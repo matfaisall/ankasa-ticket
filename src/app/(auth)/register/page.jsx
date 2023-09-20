@@ -1,16 +1,17 @@
 "use client";
 import axios from "axios";
+import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Button from "@/components/button/Button";
 import ButtonOutline from "@/components/button-outline/ButtonOutline";
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
-  // const router = useRouter();
-  // const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
+  const router = useRouter();
+  const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
 
   const [form, setForm] = useState({
     name: "",
@@ -18,21 +19,40 @@ const Register = () => {
     password: "",
   });
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
-  //   const result = axios.post(`${BASE_URL}/users/register`, form);
-  //   console.log(result);
-  //   router.push("/login", { scroll: false });
-  // };
-
-  // console.log(form);
+    try {
+      const result = await axios.post(`${BASE_URL}/auth/register`, form);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: result.data.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      router.push("/login");
+      // console.log(result.data.message);
+    } catch (error) {
+      console.log("error: ", error);
+      console.log("ini errornya", error.response.data);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error.response.data.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+    // router.push("/login", { scroll: false });
+    // console.log(form);
+  };
 
   return (
     <div className="flex min-h-screen bg-white">
       <div className="w-screen mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 max-h-screen min-h-full">
-          <div className="lg:col-span-4 bg-blue-500 max-md:hidden">
+          <div className="lg:col-span-4 bg-blue-500">
             <div className="grid place-items-center h-screen">
               <Image
                 src="/image/logo-ankasa.png"
@@ -126,7 +146,7 @@ const Register = () => {
                     className="w-4 h-4 text-blue-600 bg-white border-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
-                    for="default-checkbox"
+                    htmlFor="default-checkbox"
                     className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Accept terms and condition
