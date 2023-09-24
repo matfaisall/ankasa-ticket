@@ -18,16 +18,58 @@ const SearchTicket = () => {
   const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
 
   const [dataFlight, setDataFlight] = useState([]);
+  const [iconFacilities, setIconFacilities] = useState("");
+
+  const [facilities, setFacilities] = useState("");
+  const [airLineId, setAirLineId] = useState("");
+  console.log(facilities);
+
+  // filter facilities
+  const filterFacilities = (event) => {
+    const { value, checked } = event.target;
+    const prevFacilities = facilities.split(",");
+    const updateFacilities = checked
+      ? [...prevFacilities, value]
+      : [prevFacilities.filter((facility) => facility !== value)];
+
+    const updateFacilitiesString = updateFacilities.join(",");
+
+    const result = updateFacilitiesString.startsWith(",")
+      ? updateFacilitiesString.substring(1)
+      : updateFacilitiesString;
+
+    console.log(result);
+    setFacilities(result);
+  };
+
+  // filter airline
+  const filterAirLineId = (event) => {
+    const { value, checked } = event.target;
+    const prevAirLineId = airLineId.split(",");
+    const updateAirLineId = checked
+      ? [...prevAirLineId, value]
+      : prevAirLineId.filter((singleAirLine) => singleAirLine !== value);
+
+    const updateAirLineIdString = updateAirLineId.join(",");
+    const result = updateAirLineIdString.startsWith(",")
+      ? updateAirLineIdString.substring(1)
+      : updateAirLineIdString;
+    console.log(result);
+    setAirLineId(result);
+  };
 
   const getDataTicket = async () => {
-    const result = await axios.get(`${BASE_URL}/airlines/flight`);
+    const result = await axios.get(
+      `${BASE_URL}/airlines/flight?facilities=${facilities}&airlineId=${airLineId}`
+    );
     console.log(result.data);
     setDataFlight(result.data);
+    setIconFacilities(result.data.data);
   };
 
   useEffect(() => {
     getDataTicket();
-  }, []);
+  }, [facilities, airLineId]);
 
   return (
     <>
@@ -155,9 +197,12 @@ const SearchTicket = () => {
                   </label>
                   <input
                     type="checkbox"
-                    name=""
+                    name="luggage"
+                    value="1"
+                    onChange={filterFacilities}
                     id="luggage"
                     className="w-4 h-4 rounded-sm"
+                    checked={facilities.includes("1")}
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
@@ -166,9 +211,12 @@ const SearchTicket = () => {
                   </label>
                   <input
                     type="checkbox"
-                    name=""
+                    value="2"
+                    name="inflightmeal"
+                    onChange={filterFacilities}
                     id="inflightmeal"
                     className="w-4 h-4 rounded-sm"
+                    checked={facilities.includes("2")}
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
@@ -177,9 +225,12 @@ const SearchTicket = () => {
                   </label>
                   <input
                     type="checkbox"
-                    name=""
+                    name="wifi"
+                    value="3"
+                    onChange={filterFacilities}
                     id="wifi"
                     className="w-4 h-4 rounded-sm"
+                    checked={facilities.includes("3")}
                   />
                 </div>
               </div>
@@ -309,6 +360,20 @@ const SearchTicket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
+                  <label className="text-sm" htmlFor="singapure-airline">
+                    Singapure Airlines
+                  </label>
+                  <input
+                    type="checkbox"
+                    name=""
+                    id="singapure-airline"
+                    value="1"
+                    className="w-4 h-4 rounded-sm"
+                    onChange={filterAirLineId}
+                    checked={airLineId.includes("1")}
+                  />
+                </div>
+                <div className="flex justify-between w-full items-center mb-4">
                   <label className="text-sm" htmlFor="garuda-indoneisa">
                     Garuda Indonesia
                   </label>
@@ -316,21 +381,13 @@ const SearchTicket = () => {
                     type="checkbox"
                     name=""
                     id="garuda-indoneisa"
+                    value="2"
                     className="w-4 h-4 rounded-sm"
+                    onChange={filterAirLineId}
+                    checked={airLineId.includes("2")}
                   />
                 </div>
-                <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" htmlFor="air-asia">
-                    Air Asia
-                  </label>
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="air-asia"
-                    className="w-4 h-4 rounded-sm"
-                  />
-                </div>
-                <div className="flex flex-row justify-between w-full items-center mb-5">
+                <div className="flex justify-between w-full items-center mb-4">
                   <label className="text-sm" htmlFor="lion-air">
                     Lion Air
                   </label>
@@ -338,7 +395,38 @@ const SearchTicket = () => {
                     type="checkbox"
                     name=""
                     id="lion-air"
+                    value="3"
                     className="w-4 h-4 rounded-sm"
+                    onChange={filterAirLineId}
+                    checked={airLineId.includes("3")}
+                  />
+                </div>
+                <div className="flex justify-between w-full items-center mb-4">
+                  <label className="text-sm" htmlFor="air-asia">
+                    Air Asia
+                  </label>
+                  <input
+                    type="checkbox"
+                    name=""
+                    id="air-asia"
+                    value="4"
+                    className="w-4 h-4 rounded-sm"
+                    onChange={filterAirLineId}
+                    checked={airLineId.includes("4")}
+                  />
+                </div>
+                <div className="flex justify-between w-full items-center mb-4">
+                  <label className="text-sm" htmlFor="citilink">
+                    CitiLink
+                  </label>
+                  <input
+                    type="checkbox"
+                    name=""
+                    id="citilink"
+                    value="5"
+                    className="w-4 h-4 rounded-sm"
+                    onChange={filterAirLineId}
+                    checked={airLineId.includes("5")}
                   />
                 </div>
               </div>
@@ -384,86 +472,98 @@ const SearchTicket = () => {
           </div>
 
           {/* ticket */}
-          {dataFlight.data?.map((flightSchedule, index) => (
-            <div className="mt-4" key={flightSchedule.code}>
-              <div className="flex flex-col bg-white p-6 rounded-2xl gap-2 w-full">
-                <div className="w-full flex flex-row items-center gap-5">
-                  <Image
-                    // /image/garuda-indo.png
-                    src={flightSchedule.photo}
-                    width={90}
-                    height={60}
-                    alt={flightSchedule.name}
-                  />
-                  <p className="font-semibold text-sm text-gray-600">
-                    {flightSchedule.name}
-                  </p>
-                </div>
+          {dataFlight.data?.map((flightSchedule, index) => {
+            const isLuggage = flightSchedule.facilities.includes("baggage");
+            const isMeal = flightSchedule.facilities.includes("meal");
+            const isWifi = flightSchedule.facilities.includes("wifi");
 
-                <div className="flex flex-row justify-between items-center">
-                  <div className="w-fit">
-                    <div className="flex flex-row justify-between py-3 gap-8 items-center">
-                      <div className="text-left">
-                        <h1 className="text-xl font-semibold text-black">
-                          {flightSchedule.from.code}
-                        </h1>
-                        <p className="text-xs font-extralight text-gray-500">
-                          {new Date(
-                            flightSchedule.takeoff
-                          ).toLocaleTimeString()}
-                        </p>
-                      </div>
-                      <div className="text-gray-400">
-                        <FaPlaneDeparture size={24} />
-                      </div>
-                      <div className="text-left">
-                        <h1 className="text-xl font-semibold text-black">
-                          {flightSchedule.to.code}
-                        </h1>
-                        <p className="text-xs font-extralight text-gray-500">
-                          {new Date(
-                            flightSchedule.landing
-                          ).toLocaleTimeString()}
-                        </p>
-                      </div>
-                    </div>
+            return (
+              <div className="mt-4" key={flightSchedule.code}>
+                <div className="flex flex-col bg-white p-6 rounded-2xl gap-2 w-full">
+                  <div className="w-full flex flex-row items-center gap-5">
+                    <Image
+                      // /image/garuda-indo.png
+                      src={flightSchedule.photo}
+                      width={90}
+                      height={60}
+                      alt={flightSchedule.name}
+                    />
+                    <p className="font-semibold text-sm text-gray-600">
+                      {flightSchedule.name}
+                    </p>
                   </div>
-                  <p className="text-center w-fit text-gray-600 text-sm">
-                    {flightSchedule.interval_time}
-                    <br />
-                    <span className="text-xs text-center">
-                      ({flightSchedule.transit} transit)
-                    </span>
-                  </p>
-                  <div className="flex flex-row gap-3">
-                    <div className="text-gray-400">
-                      <PiSuitcaseRollingFill size={24} />
+
+                  <div className="flex flex-row justify-between items-center">
+                    <div className="w-fit">
+                      <div className="flex flex-row justify-between py-3 gap-8 items-center">
+                        <div className="text-left">
+                          <h1 className="text-xl font-semibold text-black">
+                            {flightSchedule.from.code}
+                          </h1>
+                          <p className="text-xs font-extralight text-gray-500">
+                            {new Date(
+                              flightSchedule.takeoff
+                            ).toLocaleTimeString()}
+                          </p>
+                        </div>
+                        <div className="text-gray-400">
+                          <FaPlaneDeparture size={24} />
+                        </div>
+                        <div className="text-left">
+                          <h1 className="text-xl font-semibold text-black">
+                            {flightSchedule.to.code}
+                          </h1>
+                          <p className="text-xs font-extralight text-gray-500">
+                            {new Date(
+                              flightSchedule.landing
+                            ).toLocaleTimeString()}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-gray-400">
-                      <FaHamburger size={24} />
+                    <p className="text-center w-fit text-gray-600 text-sm">
+                      {flightSchedule.interval_time}
+                      <br />
+                      <span className="text-xs text-center">
+                        ({flightSchedule.transit} transit)
+                      </span>
+                    </p>
+                    <div className="flex flex-row gap-3">
+                      {isLuggage && (
+                        <div className="text-gray-400">
+                          <PiSuitcaseRollingFill size={24} />
+                        </div>
+                      )}
+                      {isMeal && (
+                        <div className="text-gray-400">
+                          <FaHamburger size={24} />
+                        </div>
+                      )}
+                      {isWifi && (
+                        <div className="text-gray-400">
+                          <FaWifi size={24} />
+                        </div>
+                      )}
                     </div>
-                    <div className="text-gray-400">
-                      <FaWifi size={24} />
-                    </div>
+                    <p className="text-blue-600 font-medium">
+                      $ {flightSchedule.price}{" "}
+                      <span className="text-gray-600 text-sm">/pax</span>
+                    </p>
+                    <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
+                      Select
+                    </button>
                   </div>
-                  <p className="text-blue-600 font-medium">
-                    $ {flightSchedule.price}{" "}
-                    <span className="text-gray-600 text-sm">/pax</span>
-                  </p>
-                  <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
-                    Select
+
+                  <button className="flex gap-3 items-center">
+                    <p className="text-blue-600 font-normal">View Detail</p>
+                    <div className="text-blue-600">
+                      <IoIosArrowDown size={20} />
+                    </div>
                   </button>
                 </div>
-
-                <button className="flex gap-3 items-center">
-                  <p className="text-blue-600 font-normal">View Detail</p>
-                  <div className="text-blue-600">
-                    <IoIosArrowDown size={20} />
-                  </div>
-                </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {/* single ticket end */}
         </div>
       </div>
