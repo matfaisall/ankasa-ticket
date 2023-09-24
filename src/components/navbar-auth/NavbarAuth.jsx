@@ -10,13 +10,6 @@ import {
   Dialog,
   DialogBody,
   Input,
-  Select,
-  Option,
-  Radio,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
 } from "@material-tailwind/react";
 
 import Link from "next/link";
@@ -311,9 +304,11 @@ const NavbarAuth = () => {
               </div>
             </div>
             <div>
-              <Button size="lg" className="w-full bg-blue-600">
-                Search Flight
-              </Button>
+              <Link href="/search-ticket">
+                <Button size="lg" className="w-full bg-blue-600">
+                  Search Flight
+                </Button>
+              </Link>
             </div>
           </div>
         </DialogBody>

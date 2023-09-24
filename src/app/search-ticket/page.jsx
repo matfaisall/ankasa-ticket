@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { GoArrowSwitch } from "react-icons/go";
 import { HiArrowsUpDown } from "react-icons/hi2";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
@@ -12,7 +14,21 @@ import Link from "next/link";
 import Footer from "@/components/footer/Footer";
 import MultiRangeSlider from "@/components/multi-range-slider/MultiRangeSlider";
 
-const Ticket = () => {
+const SearchTicket = () => {
+  const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
+
+  const [dataFlight, setDataFlight] = useState([]);
+
+  const getDataTicket = async () => {
+    const result = await axios.get(`${BASE_URL}/airlines/flight`);
+    console.log(result.data);
+    setDataFlight(result.data);
+  };
+
+  useEffect(() => {
+    getDataTicket();
+  }, []);
+
   return (
     <>
       <NavbarAuth />
@@ -89,7 +105,7 @@ const Ticket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
-                  <label className="text-sm" for="direct">
+                  <label className="text-sm" htmlFor="direct">
                     Direct
                   </label>
                   <input
@@ -100,7 +116,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="transit">
+                  <label className="text-sm" htmlFor="transit">
                     Transit
                   </label>
                   <input
@@ -111,7 +127,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="transit2">
+                  <label className="text-sm" htmlFor="transit2">
                     Transit 2+
                   </label>
                   <input
@@ -134,7 +150,7 @@ const Ticket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
-                  <label className="text-sm" for="luggage">
+                  <label className="text-sm" htmlFor="luggage">
                     Luggage
                   </label>
                   <input
@@ -145,7 +161,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="inflightmeal">
+                  <label className="text-sm" htmlFor="inflightmeal">
                     In-Flight Meal
                   </label>
                   <input
@@ -156,7 +172,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="wifi">
+                  <label className="text-sm" htmlFor="wifi">
                     Wi-fi
                   </label>
                   <input
@@ -179,7 +195,7 @@ const Ticket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
-                  <label className="text-sm" for="00-06">
+                  <label className="text-sm" htmlFor="00-06">
                     00:00 - 06:00
                   </label>
                   <input
@@ -190,7 +206,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="06-12">
+                  <label className="text-sm" htmlFor="06-12">
                     06:00 -12:00
                   </label>
                   <input
@@ -201,7 +217,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="12-18">
+                  <label className="text-sm" htmlFor="12-18">
                     12:00 - 18:00
                   </label>
                   <input
@@ -212,7 +228,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="18-24">
+                  <label className="text-sm" htmlFor="18-24">
                     18:00 - 24:00
                   </label>
                   <input
@@ -225,6 +241,7 @@ const Ticket = () => {
               </div>
             </div>
             {/*time arrived */}
+
             <div className="border-b-2">
               <button className="flex flex-row justify-between w-full py-5">
                 <p className="font-semibold">Time Arrived</p>
@@ -235,7 +252,7 @@ const Ticket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
-                  <label className="text-sm" for="00-06">
+                  <label className="text-sm" htmlFor="00-06">
                     00:00 - 06:00
                   </label>
                   <input
@@ -246,7 +263,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="06-12">
+                  <label className="text-sm" htmlFor="06-12">
                     06:00 -12:00
                   </label>
                   <input
@@ -257,7 +274,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="12-18">
+                  <label className="text-sm" htmlFor="12-18">
                     12:00 - 18:00
                   </label>
                   <input
@@ -268,7 +285,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="18-24">
+                  <label className="text-sm" htmlFor="18-24">
                     18:00 - 24:00
                   </label>
                   <input
@@ -292,7 +309,7 @@ const Ticket = () => {
 
               <div className="flex flex-col">
                 <div className="flex justify-between w-full items-center mb-4">
-                  <label className="text-sm" for="garuda-indoneisa">
+                  <label className="text-sm" htmlFor="garuda-indoneisa">
                     Garuda Indonesia
                   </label>
                   <input
@@ -303,7 +320,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="air-asia">
+                  <label className="text-sm" htmlFor="air-asia">
                     Air Asia
                   </label>
                   <input
@@ -314,7 +331,7 @@ const Ticket = () => {
                   />
                 </div>
                 <div className="flex flex-row justify-between w-full items-center mb-5">
-                  <label className="text-sm" for="lion-air">
+                  <label className="text-sm" htmlFor="lion-air">
                     Lion Air
                   </label>
                   <input
@@ -367,67 +384,86 @@ const Ticket = () => {
           </div>
 
           {/* ticket */}
-          <div className="mt-4">
-            <div className="flex flex-col bg-white p-6 rounded-2xl gap-2 w-full">
-              <div className="w-full flex flex-row items-center gap-5">
-                <Image src="/image/garuda-indo.png" width={90} height={60} />
-                <p className="font-semibold text-sm text-gray-600">
-                  Garuda Indonesia
-                </p>
-              </div>
+          {dataFlight.data?.map((flightSchedule, index) => (
+            <div className="mt-4" key={flightSchedule.code}>
+              <div className="flex flex-col bg-white p-6 rounded-2xl gap-2 w-full">
+                <div className="w-full flex flex-row items-center gap-5">
+                  <Image
+                    // /image/garuda-indo.png
+                    src={flightSchedule.photo}
+                    width={90}
+                    height={60}
+                    alt={flightSchedule.name}
+                  />
+                  <p className="font-semibold text-sm text-gray-600">
+                    {flightSchedule.name}
+                  </p>
+                </div>
 
-              <div className="flex flex-row justify-between items-center">
-                <div className="w-fit">
-                  <div className="flex flex-row justify-between py-3 gap-8 items-center">
-                    <div className="text-left">
-                      <h1 className="text-xl font-semibold text-black">IDN</h1>
-                      <p className="text-xs font-extralight text-gray-500">
-                        12.33
-                      </p>
+                <div className="flex flex-row justify-between items-center">
+                  <div className="w-fit">
+                    <div className="flex flex-row justify-between py-3 gap-8 items-center">
+                      <div className="text-left">
+                        <h1 className="text-xl font-semibold text-black">
+                          {flightSchedule.from.code}
+                        </h1>
+                        <p className="text-xs font-extralight text-gray-500">
+                          {new Date(
+                            flightSchedule.takeoff
+                          ).toLocaleTimeString()}
+                        </p>
+                      </div>
+                      <div className="text-gray-400">
+                        <FaPlaneDeparture size={24} />
+                      </div>
+                      <div className="text-left">
+                        <h1 className="text-xl font-semibold text-black">
+                          {flightSchedule.to.code}
+                        </h1>
+                        <p className="text-xs font-extralight text-gray-500">
+                          {new Date(
+                            flightSchedule.landing
+                          ).toLocaleTimeString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-center w-fit text-gray-600 text-sm">
+                    {flightSchedule.interval_time}
+                    <br />
+                    <span className="text-xs text-center">
+                      ({flightSchedule.transit} transit)
+                    </span>
+                  </p>
+                  <div className="flex flex-row gap-3">
+                    <div className="text-gray-400">
+                      <PiSuitcaseRollingFill size={24} />
                     </div>
                     <div className="text-gray-400">
-                      <FaPlaneDeparture size={24} />
+                      <FaHamburger size={24} />
                     </div>
-                    <div className="text-left">
-                      <h1 className="text-xl font-semibold text-black">JPN</h1>
-                      <p className="text-xs font-extralight text-gray-500">
-                        15.21
-                      </p>
+                    <div className="text-gray-400">
+                      <FaWifi size={24} />
                     </div>
                   </div>
+                  <p className="text-blue-600 font-medium">
+                    $ {flightSchedule.price}{" "}
+                    <span className="text-gray-600 text-sm">/pax</span>
+                  </p>
+                  <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
+                    Select
+                  </button>
                 </div>
-                <p className="text-center w-fit text-gray-600 text-">
-                  3 hours 11 minutes
-                  <br />
-                  <span className="text-xs text-center">(1 transit)</span>
-                </p>
-                <div className="flex flex-row gap-3">
-                  <div className="text-gray-400">
-                    <PiSuitcaseRollingFill size={24} />
+
+                <button className="flex gap-3 items-center">
+                  <p className="text-blue-600 font-normal">View Detail</p>
+                  <div className="text-blue-600">
+                    <IoIosArrowDown size={20} />
                   </div>
-                  <div className="text-gray-400">
-                    <FaHamburger size={24} />
-                  </div>
-                  <div className="text-gray-400">
-                    <FaWifi size={24} />
-                  </div>
-                </div>
-                <p className="text-blue-600 font-medium">
-                  $ 214,00 <span className="text-gray-600 text-sm">/pax</span>
-                </p>
-                <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
-                  Select
                 </button>
               </div>
-
-              <button className="flex gap-3 items-center">
-                <p className="text-blue-600 font-normal">View Detail</p>
-                <div className="text-blue-600">
-                  <IoIosArrowDown size={20} />
-                </div>
-              </button>
             </div>
-          </div>
+          ))}
           {/* single ticket end */}
         </div>
       </div>
@@ -438,4 +474,4 @@ const Ticket = () => {
   );
 };
 
-export default Ticket;
+export default SearchTicket;

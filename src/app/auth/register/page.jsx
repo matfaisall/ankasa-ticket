@@ -31,7 +31,7 @@ const Register = () => {
         showConfirmButton: false,
         timer: 3000,
       });
-      router.push("/login");
+      router.push("/auth/login");
       // console.log(result.data.message);
     } catch (error) {
       console.log("error: ", error);
@@ -163,7 +163,7 @@ const Register = () => {
                       <ButtonOutline
                         type="button"
                         text="Sign In"
-                        navigate="/login"
+                        navigate="/auth/login"
                       />
                     </div>
                   </div>

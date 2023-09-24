@@ -1,11 +1,4 @@
 "use client";
-
-// import Image from "next/image";
-
-// import { FiSearch } from "react-icons/fi";
-// import { FiBell, FiMail } from "react-icons/fi";
-// import { HiMenu } from "react-icons/hi";
-
 import React, { useEffect, useState } from "react";
 import {
   Navbar,
@@ -16,13 +9,6 @@ import {
   Dialog,
   DialogBody,
   Input,
-  Select,
-  Option,
-  Radio,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
 } from "@material-tailwind/react";
 import Link from "next/link";
 
@@ -30,7 +16,7 @@ import Link from "next/link";
 import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
 import { LiaExchangeAltSolid } from "react-icons/lia";
-import { FaPlaneDeparture, FaWifi } from "react-icons/fa6";
+import { FaPlaneDeparture } from "react-icons/fa6";
 import { MdOutlineReplay } from "react-icons/md";
 
 export function NavigationBar() {
@@ -116,7 +102,7 @@ export function NavigationBar() {
           <div className="mr-4 hidden lg:block">{navList}</div>
           <div className="flex items-center gap-4">
             <Button size="sm" className="hidden lg:inline-block bg-blue-600">
-              <span>Sign Up</span>
+              <Link href="/auth/register">Sign Up</Link>
             </Button>
             <IconButton
               variant="text"
@@ -131,7 +117,7 @@ export function NavigationBar() {
         <Collapse open={openNav}>
           {navList}
           <Button size="sm" fullWidth className="mb-2 bg-blue-600">
-            <span>Sign Up</span>
+            <Link href="/auth/register">Sign UP</Link>
           </Button>
         </Collapse>
       </Navbar>
@@ -288,9 +274,11 @@ export function NavigationBar() {
               </div>
             </div>
             <div>
-              <Button size="lg" className="w-full bg-blue-600">
-                Search Flight
-              </Button>
+              <Link href="search-ticket">
+                <Button size="lg" className="w-full bg-blue-600">
+                  Search Flight
+                </Button>
+              </Link>
             </div>
           </div>
         </DialogBody>
