@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 
@@ -12,6 +13,8 @@ import { IoIosArrowDown } from "react-icons/io";
 
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
+
+const passangerName = localStorage?.getItem("name");
 
 const Profile = () => {
   return (
@@ -46,7 +49,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <h2 className="font-semibold text-base text-center">
-                      Mike Kowalski
+                      {passangerName || "faisal"}
                     </h2>
                     <div className="flex flex-row items-center justify-center">
                       <div className="text-blue-600 mr-2">

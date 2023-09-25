@@ -68,7 +68,7 @@ const NavbarAuth = () => {
           className="flex items-center hover:underline hover:underline-offset-8 hover:text-blue-600"
           onClick={handleOpenDialog}
         >
-          Find Tickket
+          Find Ticket
         </Link>
       </Typography>
       <Typography
@@ -78,7 +78,7 @@ const NavbarAuth = () => {
         className="p-1 font-normal"
       >
         <Link
-          href="#"
+          href="/my-booking"
           className="flex items-center  hover:underline hover:underline-offset-8 hover:text-blue-600"
         >
           My Booking
@@ -110,15 +110,17 @@ const NavbarAuth = () => {
               <div>
                 <FiBell size={20} color="gray" />
               </div>
-              <div className="border-blue-600 border-2 rounded-full overflow-hidden cursor-pointer">
-                <div className="w-8">
-                  <img
-                    src="/image/fakeAvatar.jpg"
-                    alt=""
-                    className="rounded-full p-1"
-                  />
+              <Link href="/profile">
+                <div className="border-blue-600 border-2 rounded-full overflow-hidden cursor-pointer">
+                  <div className="w-8">
+                    <img
+                      src="/image/fakeAvatar.jpg"
+                      alt=""
+                      className="rounded-full p-1"
+                    />
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
             <IconButton
               variant="text"

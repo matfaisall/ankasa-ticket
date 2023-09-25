@@ -549,9 +549,11 @@ const SearchTicket = () => {
                       $ {flightSchedule.price}{" "}
                       <span className="text-gray-600 text-sm">/pax</span>
                     </p>
-                    <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
-                      Select
-                    </button>
+                    <Link href="/my-booking">
+                      <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
+                        Select
+                      </button>
+                    </Link>
                   </div>
 
                   <button className="flex gap-3 items-center">

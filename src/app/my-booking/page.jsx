@@ -204,7 +204,9 @@ const MyBooking = () => {
                     </div>
                   </div>
                   <div className="my-6 w-[36%] mx-auto">
-                    <Button type="submit" text="Proceed to Payment" />
+                    <Link href="my-booking/payment">
+                      <Button type="submit" text="Proceed to Payment" />
+                    </Link>
                   </div>
                 </form>
               </main>
