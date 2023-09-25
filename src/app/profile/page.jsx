@@ -4,6 +4,9 @@ import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 
 import Image from "next/image";
 
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+
 import { HiMapPin } from "react-icons/hi2";
 import { FaRegUserCircle, FaPlaneDeparture } from "react-icons/fa";
 import { BiChevronRight } from "react-icons/bi";
@@ -14,9 +17,32 @@ import { IoIosArrowDown } from "react-icons/io";
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
 
-const passangerName = localStorage?.getItem("name");
-
 const Profile = () => {
+  const router = useRouter();
+  const passangerName = localStorage?.getItem("name");
+
+  const logoutHandler = () => {
+    Swal.fire({
+      title: "Do you want to logout ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          // showConfirmButton: false,
+          icon: "success",
+          title: "You have successfully logged out",
+        }).then((isConfirm) => {
+          if (isConfirm) {
+            localStorage.clear("access_token");
+            router.push("/auth/login");
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <NavbarAuth />
@@ -115,7 +141,10 @@ const Profile = () => {
                   </button>
                 </div>
                 <div>
-                  <button className="flex flex-row justify-between w-full py-3">
+                  <button
+                    className="flex flex-row justify-between w-full py-3"
+                    onClick={logoutHandler}
+                  >
                     <div className="flex flex-row items-center gap-2 text-red-600">
                       <FiLogOut size={20} />
                       <p className="font-semibold">Logout</p>

@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Poppins } from "next/font/google";
-import Loading from "./loading";
+// import Loading from "./loading";
 
 const poppins = Poppins({
   subsets: ["latin"],
