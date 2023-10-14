@@ -7,22 +7,23 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaPlaneDeparture, FaWifi } from "react-icons/fa6";
 import { FaHamburger } from "react-icons/fa";
 import { PiSuitcaseRollingFill } from "react-icons/pi";
+import RangeSlider from "react-range-slider-input";
 import Image from "next/image";
 
 import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
-import MultiRangeSlider from "@/components/multi-range-slider/MultiRangeSlider";
 
 const SearchTicket = () => {
-  const BASE_URL = `https://easy-lime-seal-toga.cyclic.app`;
+  const BASE_URL = process.env.NEXT_PUBLIC_FLIGHT_API;
 
   const [dataFlight, setDataFlight] = useState([]);
   const [iconFacilities, setIconFacilities] = useState("");
 
   const [facilities, setFacilities] = useState("");
   const [airLineId, setAirLineId] = useState("");
-  console.log(facilities);
+
+  const [rangePrice, setRangePrice] = useState([0, 1000]);
 
   // filter facilities
   const filterFacilities = (event) => {
@@ -60,7 +61,7 @@ const SearchTicket = () => {
 
   const getDataTicket = async () => {
     const result = await axios.get(
-      `${BASE_URL}/airlines/flight?facilities=${facilities}&airlineId=${airLineId}`
+      `${BASE_URL}/airlines/flight?facilities=${facilities}&airlineId=${airLineId}&minPrice=${rangePrice[0]}&maxPrice=${rangePrice[1]}`
     );
     console.log(result.data);
     setDataFlight(result.data);
@@ -69,7 +70,7 @@ const SearchTicket = () => {
 
   useEffect(() => {
     getDataTicket();
-  }, [facilities, airLineId]);
+  }, [facilities, airLineId, rangePrice]);
 
   return (
     <>
@@ -137,6 +138,7 @@ const SearchTicket = () => {
           {/* Fiilter */}
           <div className="w-full p-4 mt-4 bg-white rounded-xl">
             {/* transit */}
+            {/* 
             <div className="border-b-2">
               <button className="flex flex-row justify-between w-full py-5">
                 <p className="font-semibold">Transit</p>
@@ -181,6 +183,7 @@ const SearchTicket = () => {
                 </div>
               </div>
             </div>
+            */}
             {/* facilities */}
             <div className="border-b-2">
               <button className="flex flex-row justify-between w-full py-5">
@@ -236,7 +239,7 @@ const SearchTicket = () => {
               </div>
             </div>
             {/* Departure time */}
-            <div className="border-b-2">
+            {/* <div className="border-b-2">
               <button className="flex flex-row justify-between w-full py-5">
                 <p className="font-semibold">Departure Time</p>
                 <div className="text-blue-600">
@@ -290,10 +293,10 @@ const SearchTicket = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
             {/*time arrived */}
 
-            <div className="border-b-2">
+            {/* <div className="border-b-2">
               <button className="flex flex-row justify-between w-full py-5">
                 <p className="font-semibold">Time Arrived</p>
                 <div className="text-blue-600">
@@ -347,7 +350,7 @@ const SearchTicket = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Air lines */}
             <div className="border-b-2">
@@ -435,7 +438,7 @@ const SearchTicket = () => {
             {/* ticket price */}
             <div className="">
               <button className="flex flex-row justify-between w-full py-5">
-                <p className="font-semibold">Airlines</p>
+                <p className="font-semibold">Ticket Price</p>
                 <div className="text-blue-600">
                   <IoIosArrowUp size={20} />
                 </div>
@@ -451,7 +454,22 @@ const SearchTicket = () => {
                   </div>
                 </div>
                 {/* range */}
-                <MultiRangeSlider min={0} max={1000} />
+                <div className="flex w-100 justify-center">
+                  <RangeSlider
+                    min={0}
+                    max={1000}
+                    value={rangePrice}
+                    onInput={setRangePrice}
+                  />
+                </div>
+                <div className="flex justify-between w-full items-center mb-4">
+                  <div>
+                    <p className="text-sm text-gray-400">{rangePrice[0]}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">{rangePrice[1]}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
