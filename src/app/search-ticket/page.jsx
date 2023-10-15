@@ -19,6 +19,7 @@ const SearchTicket = () => {
 
   const [dataFlight, setDataFlight] = useState([]);
   const [iconFacilities, setIconFacilities] = useState("");
+  const [totalFlight, setTotalFlight] = useState(0);
 
   const [facilities, setFacilities] = useState("");
   const [airLineId, setAirLineId] = useState("");
@@ -63,7 +64,8 @@ const SearchTicket = () => {
     const result = await axios.get(
       `${BASE_URL}/airlines/flight?facilities=${facilities}&airlineId=${airLineId}&minPrice=${rangePrice[0]}&maxPrice=${rangePrice[1]}`
     );
-    console.log(result.data);
+    console.log("ini result", result.data);
+    setTotalFlight(result.data.data.length);
     setDataFlight(result.data);
     setIconFacilities(result.data.data);
   };
@@ -479,7 +481,9 @@ const SearchTicket = () => {
           <div className="flex justify-between">
             <div className="flex items-center">
               <p className="font-semibold pr-1">Select Ticket </p>
-              <span className="font-light text-xs">(6 flight found)</span>
+              <span className="font-light text-xs">
+                ({totalFlight} flight found)
+              </span>
             </div>
             <button>
               <div className="flex flex-row gap-2 items-center ">
@@ -567,7 +571,7 @@ const SearchTicket = () => {
                       $ {flightSchedule.price}{" "}
                       <span className="text-gray-600 text-sm">/pax</span>
                     </p>
-                    <Link href="/my-booking">
+                    <Link href={`search-ticket/${flightSchedule.code}`}>
                       <button className="bg-blue-600 text-white rounded-xl font-semibold py-2 px-10 shadow-md">
                         Select
                       </button>

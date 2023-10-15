@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 import Footer from "@/components/footer/Footer";
@@ -9,6 +10,7 @@ import { BiSolidLockAlt } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMdTime } from "react-icons/io";
 import Button from "@/components/button/Button";
+import Link from "next/link";
 
 const Payment = () => {
   return (
@@ -187,7 +189,9 @@ const Payment = () => {
                   </div>
                 </div>
                 {/*  */}
-                <Button type="submit" text="Try it free for 30 days" />
+                <Link href="">
+                  <Button type="submit" text="Try it free for 30 days" />
+                </Link>
 
                 <div className="underline underline-offset-2 text-blue-600 text-center text-xs">
                   Have a promo code ?
