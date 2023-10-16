@@ -253,6 +253,11 @@ const Profile = () => {
                           {items.status.name}
                         </button>
                       </Link>
+                      <Link href={`/my-booking/${items.code}`}>
+                        <p className="text-orange-500 text-sm">
+                          complete the transaction
+                        </p>
+                      </Link>
                     </div>
                     <Link href="#">
                       <div className="flex flex-row items-center gap-2 text-blue-600">
