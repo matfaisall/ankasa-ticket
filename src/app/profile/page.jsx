@@ -1,11 +1,11 @@
 "use client";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-
 import Button from "@/components/button/Button";
 
 import { HiMapPin } from "react-icons/hi2";
@@ -13,12 +13,9 @@ import { FaRegUserCircle, FaPlaneDeparture } from "react-icons/fa";
 import { BiChevronRight } from "react-icons/bi";
 import { AiFillStar, AiTwotoneSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-import { IoIosArrowDown } from "react-icons/io";
 
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
-import axios from "axios";
-import convertDate from "@/utils/convertDate";
 
 const Profile = () => {
   const [profileDetail, setProfileDetail] = useState({});
