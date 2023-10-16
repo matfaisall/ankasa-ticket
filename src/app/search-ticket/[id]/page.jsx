@@ -113,6 +113,7 @@ const DetailTicket = () => {
           },
         }
       );
+      router.push("/payment");
       console.log("Post detail:", response.data);
     } catch (error) {
       console.error("Error:", error);

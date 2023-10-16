@@ -259,7 +259,7 @@ const Profile = () => {
                         </p>
                       </Link>
                     </div>
-                    <Link href="#">
+                    <Link href={`/bookingpass/${items.code}`}>
                       <div className="flex flex-row items-center gap-2 text-blue-600">
                         <p className="text-sm">View Details</p>
                         <IoIosArrowDown />
