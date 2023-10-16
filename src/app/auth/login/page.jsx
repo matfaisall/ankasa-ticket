@@ -8,10 +8,10 @@ import Image from "next/image";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Login Ankasa Ticket",
-  description: "Login on Ankasa Ticket",
-};
+// export const metadata = {
+//   title: "Login Ankasa Ticket",
+//   description: "Login on Ankasa Ticket",
+// };
 
 // use this account
 // email : ronaldo@gmail.com
