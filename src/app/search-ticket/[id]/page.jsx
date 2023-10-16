@@ -5,7 +5,7 @@ import NavbarAuth from "@/components/navbar-auth/NavbarAuth";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import Button from "@/components/button/Button";
 
@@ -17,19 +17,21 @@ import { IoIosArrowDown } from "react-icons/io";
 import convertDate from "@/utils/convertDate";
 
 const DetailTicket = () => {
+  const { id } = useParams();
+  const router = useRouter();
   const BASE_URL = process.env.NEXT_PUBLIC_FLIGHT_API;
 
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState(null);
   const [contactPerson, setContactPerson] = useState({});
   const [flightDetail, setFlightDetail] = useState({});
   const [formPassanger, setFormPassanger] = useState({
-    call: "",
-    name: "",
+    title1: "",
+    fullname1: "",
     nationality1: "",
   });
-  const { id } = useParams();
+
   console.log(id);
-  console.log(token);
+  // console.log(token);
   console.log("form passanger", formPassanger);
 
   // get contant api
@@ -37,7 +39,8 @@ const DetailTicket = () => {
     try {
       const response = await axios.get(`${BASE_URL}/booking/tickets/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
       });
       // console.log(response.data);
@@ -52,10 +55,11 @@ const DetailTicket = () => {
     try {
       const response = await axios.get(`${BASE_URL}/airlines/flight/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      console.log(response?.data);
       setFlightDetail(response?.data);
     } catch (error) {
       console.log(`Error, get Flight Detail`, error);
@@ -63,36 +67,68 @@ const DetailTicket = () => {
   };
 
   // post passanger
+  // const postPassanger = async () => {
+  //   try {
+  //     const data = {
+  //       title1: formPassanger.title1,
+  //       fullname1: formPassanger.fullname1,
+  //       nationality1: formPassanger.nationality1,
+  //     };
+  //     console.log("ini data", data);
+
+  //     const response = await axios.post(
+  //       `${BASE_URL}/booking/tickets/${id}`,
+  //       data,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+  //           "Content-Type": "application/x-www-form-urlencoded",
+  //         },
+  //       }
+  //     );
+  //     console.log("ini response post", response);
+  //   } catch (error) {
+  //     console.log("erorr", error);
+  //   }
+  // };
+
   const postPassanger = async () => {
     try {
+      let bodyFormData = new FormData();
+      bodyFormData.append("title1", formPassanger.title1);
+      bodyFormData.append("fullname1", formPassanger.fullname1);
+      bodyFormData.append("nationality1", formPassanger.nationality1);
+      const urlSearchParams = new URLSearchParams();
+      for (const [key, value] of bodyFormData) {
+        urlSearchParams.append(key, value);
+      }
+
       const response = await axios.post(
-        `${BASE_URL}/booking/tickets/${id}`,
-        formPassanger,
+        `${process.env.NEXT_PUBLIC_FLIGHT_API}/booking/tickets/${id}`,
+        urlSearchParams.toString(),
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
-      console.log("ini response post", response.data);
+      console.log("Post detail:", response.data);
     } catch (error) {
-      console.log("erorr", error);
+      console.error("Error:", error);
+      // toast.error("Post detail passenger failed");
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setToken(localStorage.getItem("access_token"));
-    }
-  }, []);
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setFormPassanger({ ...formPassanger, [name]: value });
+  };
 
   useEffect(() => {
-    if (token) {
-      getContactPersonDetails();
-      getFlightDetails();
-    }
-  }, [token]);
+    getContactPersonDetails();
+    getFlightDetails();
+  }, []);
 
   return (
     <>
@@ -126,7 +162,7 @@ const DetailTicket = () => {
                       <input
                         type="text"
                         id="name"
-                        value={contactPerson.user?.name}
+                        value={contactPerson?.user?.name}
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                       />
@@ -142,7 +178,7 @@ const DetailTicket = () => {
                       <input
                         type="email"
                         id="user-email"
-                        value={contactPerson.user?.email}
+                        value={contactPerson?.user?.email}
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                       />
@@ -218,22 +254,16 @@ const DetailTicket = () => {
                   </div>
                   <form>
                     <div className="relative z-0 mb-8">
-                      <label htmlFor="underline_select" className="sr-only">
+                      <label htmlFor="title1" className="sr-only">
                         Underline select
                       </label>
                       <select
-                        id="underline_select"
-                        name="call"
-                        // value={formPassanger.call}
-                        onChange={(e) =>
-                          setFormPassanger({
-                            ...formPassanger,
-                            call: e.target.value,
-                          })
-                        }
+                        id="title1"
+                        name="title1"
+                        value={formPassanger.title1}
+                        onChange={onChange}
                         className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option>Choose Call Name</option>
                         <option value="mr.">Mr.</option>
                         <option value="mis.">Mis.</option>
                       </select>
@@ -242,39 +272,29 @@ const DetailTicket = () => {
                     <div className="relative z-0 mb-8">
                       <input
                         type="text"
-                        id="user-name"
-                        name="name"
-                        onChange={(e) =>
-                          setFormPassanger({
-                            ...formPassanger,
-                            name: e.target.value,
-                          })
-                        }
-                        // value={formPassanger.name}
+                        id="fullname1"
+                        name="fullname1"
+                        onChange={onChange}
+                        value={formPassanger.fullname1}
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-nonetext-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                       />
                       <label
-                        htmlFor="user-name"
+                        htmlFor="fullname1"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         Full Name
                       </label>
                     </div>
                     <div className="relative z-0">
-                      <label htmlFor="underline_select" className="sr-only">
+                      <label htmlFor="nationality1" className="sr-only">
                         Underline select
                       </label>
                       <select
-                        id="underline_select"
-                        // value={formPassanger.nationality1}
-                        onChange={(e) =>
-                          setFormPassanger({
-                            ...formPassanger,
-                            nationality1: e.target.value,
-                          })
-                        }
+                        id="nationality1"
                         name="nationality1"
+                        value={formPassanger.nationality1}
+                        onChange={onChange}
                         className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
                         <option>Nationality</option>
@@ -329,8 +349,8 @@ const DetailTicket = () => {
                   <div className="my-6 w-[36%] mx-auto">
                     <Link href="/payment">
                       <Button
-                        onClick={() => postPassanger()}
                         type="submit"
+                        onClick={() => postPassanger()}
                         text="Proceed to Payment"
                       />
                     </Link>

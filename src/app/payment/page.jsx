@@ -189,7 +189,7 @@ const Payment = () => {
                   </div>
                 </div>
                 {/*  */}
-                <Link href="">
+                <Link href="/my-booking">
                   <Button type="submit" text="Try it free for 30 days" />
                 </Link>
 
