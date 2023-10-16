@@ -109,8 +109,11 @@ const Homepage = () => {
       {/* swipper */}
       <div className="w-screen px-12 mx-auto my-16">
         <div className="flex flex-row">
-          {dataTrend.map((item) => (
-            <article className="relative isolate flex flex-col shadow-lg overflow-hidden rounded-2xl px-4 py-4 w-48 h-64 max-w-sm my-2 mx-auto">
+          {dataTrend.map((item, index) => (
+            <article
+              className="relative isolate flex flex-col shadow-lg overflow-hidden rounded-2xl px-4 py-4 w-48 h-64 max-w-sm my-2 mx-auto"
+              key={index}
+            >
               <img
                 src={item.image.src}
                 alt=""
@@ -155,9 +158,13 @@ const Homepage = () => {
               >
                 <div className="border-white border-2 p-2 rounded-full">
                   <div className="w-44 h-44 overflow-hidden rounded-full">
-                    <img
+                    {/* <div className=""></div> */}
+                    <Image
                       src={distination.image.src}
                       alt={distination.country}
+                      height={200}
+                      width={200}
+                      style={{ width: "100%", height: "100%" }}
                     />
                   </div>
                 </div>

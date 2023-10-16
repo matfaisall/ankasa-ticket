@@ -54,9 +54,7 @@ const ForgetPassword = () => {
 
                 <div className="py-4">
                   <div className="text-center text-sm">
-                    <p className="mb-2">
-                      You'll get message soon on your email
-                    </p>
+                    <p className="mb-2">Youll get message soon on your email</p>
                   </div>
                 </div>
               </div>
